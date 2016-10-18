@@ -1,0 +1,12 @@
+name:           appendixB
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable tardis
+  build-depends:   base >= 4, tardis
+  hs-source-dirs:  src
+  ghc-options:     -Wall
+  main-is:         Main.hs
+

@@ -1,0 +1,13 @@
+imports
+{
+import Data.List
+}
+
+include "OfferType.ag"
+
+attr Offer
+  syn presents use {++} {[]} :: {[a]}
+
+sem Eq {a} => Offer
+  | Present  lhs.presents = [@present]
+  | Restrict lhs.presents = { @products `intersect` @inner.presents }

@@ -1,0 +1,12 @@
+name:           chapter16
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:  src
+  build-depends:   base >= 4, free
+  ghc-options:     -Wall
+  exposed-modules: Chapter16.FreeMonads
+

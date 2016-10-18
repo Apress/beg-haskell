@@ -1,0 +1,21 @@
+name:           chapter14
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Custom
+author:         serras
+
+executable uuagc-examples
+  hs-source-dirs:  src
+  build-depends:   base >= 4, mtl, blaze-html >= 0.6
+  ghc-options:     -Wall
+  other-modules:   Chapter14.Expr,
+                   Chapter14.Expr2,
+                   Chapter14.ExprMonad,
+                   Chapter14.Presents,
+                   Chapter14.Simple,
+                   Chapter14.SimpleNoAG,
+                   Chapter14.Description,
+                   Chapter14.Origami
+  extensions:      ScopedTypeVariables
+  main-is:         Main.hs
+

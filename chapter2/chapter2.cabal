@@ -1,0 +1,17 @@
+name:           chapter2
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         Alejandro Serrano
+
+library
+  hs-source-dirs:  src
+  build-depends:   base >= 4
+  ghc-options:     -Wall
+  exposed-modules: 
+                   Chapter2.Section2.Example,
+                   Chapter2.SimpleFunctions
+  other-modules:   
+                   Chapter2.DataTypes,
+                   Chapter2.DefaultValues
+

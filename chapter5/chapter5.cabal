@@ -1,0 +1,24 @@
+name:           chapter5
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:   src
+  build-depends:    
+                   base >= 4,
+                   deepseq
+  ghc-options:      -Wall
+  exposed-modules:  Chapter5.Infinite
+  other-modules:    
+                   Chapter5.Problems,
+                   Chapter5.Annotations
+
+executable profiling-example
+  build-depends:   base >= 4
+  hs-source-dirs:  src
+  ghc-options:     -Wall -prof -fprof-auto -rtsopts
+  main-is:         Main.hs
+  other-modules:   Chapter5.Annotations
+

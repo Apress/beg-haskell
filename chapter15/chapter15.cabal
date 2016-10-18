@@ -1,0 +1,42 @@
+name:           chapter15
+version:        0.1
+cabal-version:  >=1.8
+-- cabal: The field 'build-depends: chapter15' refers to a library which is
+-- defined within the same package. To use this feature the package must specify
+-- at least 'cabal-version: >= 1.8'.
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:  src
+  build-depends:   
+                   base >= 4,
+                   QuickCheck
+  ghc-options:     -Wall
+  exposed-modules: Chapter15.BinaryTree
+
+test-suite HSpec
+  type:            exitcode-stdio-1.0
+  ghc-options:     -Wall -rtsopts
+  build-depends:   
+                   base >= 4,
+                   hspec,
+                   hspec-smallcheck,
+                   HUnit,
+                   chapter15
+  hs-source-dirs:  test
+  main-is:         HSpec.hs
+
+test-suite Tasty
+  type:            exitcode-stdio-1.0
+  ghc-options:     -Wall -rtsopts
+  build-depends:   
+                   base >= 4,
+                   tasty >=0.4.0 && <0.5,
+                   tasty-hunit >=0.2 && <0.3,
+                   tasty-quickcheck >=0.3.1 && <0.4,
+                   tasty-smallcheck >=0.2 && <0.3,
+                   chapter15
+  hs-source-dirs:  test
+  main-is:         Tasty.hs
+

@@ -1,0 +1,23 @@
+name:           chapter13
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:  src
+  build-depends:   base >= 4, singletons, persistent, persistent-template
+  ghc-options:     -Wall
+  other-modules:   
+                   Chapter13.GADTs,
+                   Chapter13.Initial,
+                   Chapter13.CheckPresentsFnDeps,
+                   Chapter13.CheckPresentsTyFams,
+                   Chapter13.CheckPresentsPromoted,
+                   Chapter13.VectorsLits,
+                   Chapter13.CheckRangesPromoted,
+                   Chapter13.Users,
+                   Chapter13.Numbers,
+                   Chapter13.CategoriesFnDeps,
+                   Chapter13.CategoriesTyFams,
+                   Chapter13.Database

@@ -1,0 +1,25 @@
+name:           chapter8
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable par
+  hs-source-dirs:  src
+  main-is:         Par.hs
+  build-depends:   base >= 4, monad-par, containers, deepseq
+  ghc-options:     -Wall -threaded
+  other-modules:   Chapter8.APriori.Par, Chapter8.APriori.Par2
+
+executable stm
+  hs-source-dirs:  src
+  main-is:         Stm.hs
+  build-depends:   base >= 4, stm, random
+  ghc-options:     -Wall -threaded
+
+executable distr
+  hs-source-dirs:  src
+  main-is:         Distr.hs
+  build-depends:   base >= 4, binary >= 0.6.3.0 && < 0.7, distributed-process, distributed-process-simplelocalnet, random
+  ghc-options:     -Wall -threaded
+

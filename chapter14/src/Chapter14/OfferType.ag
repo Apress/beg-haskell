@@ -1,0 +1,15 @@
+include "ExprType.ag"
+
+data Offer a 
+  | Present  present :: {a}
+  | PercentDiscount  discount :: Float
+  | AbsoluteDiscount discount :: Float
+  | Restrict products :: {[a]} inner :: (Offer {a})
+  | From   from  :: Int inner :: (Offer {a})
+  | Until  until :: Int inner :: (Offer {a})
+  | Extend times :: Int inner :: (Offer {a})
+  | Both     left :: (Offer {a}) right :: (Offer {a})
+  | BetterOf left :: (Offer {a}) right :: (Offer {a})
+  | If cond :: (Root {a}) then :: (Offer {a}) else :: (Offer {a})
+
+deriving Offer : Show

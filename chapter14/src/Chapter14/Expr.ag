@@ -1,0 +1,59 @@
+imports
+{
+import Control.Applicative
+}
+
+include "ExprType.ag"
+
+attr Root Expr
+  inh products  :: {[(a, Float)]}
+  syn intValue  :: {Maybe Int}
+  syn fltValue  :: {Maybe Float}
+  syn boolValue :: {Maybe Bool}
+
+attr Expr
+  inh numberOfProducts :: Int
+  inh totalPrice       :: Float
+
+sem Eq {a} => Root
+  | Root expr.numberOfProducts = length @lhs.products
+         expr.totalPrice       = foldr (\(_,p) x -> p + x) 0.0 @lhs.products
+
+sem Eq {a} => Expr
+  | AmountOf lhs.intValue  = { Just (length $ filter (\(d,_) -> d == @product) @lhs.products) }
+             lhs.fltValue  = Nothing
+             lhs.boolValue = Nothing
+  | PriceOf  lhs.intValue  = Nothing
+             lhs.fltValue  = { Just (foldr (\(_,p) x -> p + x) 0.0 $ filter (\(d,_) -> d == @product) @lhs.products) }
+             lhs.boolValue = Nothing
+  | TotalNumberOfProducts lhs.intValue  = Just @lhs.numberOfProducts
+                          lhs.fltValue  = Nothing
+                          lhs.boolValue = Nothing
+  | TotalPrice            lhs.intValue  = Nothing
+                          lhs.fltValue  = Just @lhs.totalPrice
+                          lhs.boolValue = Nothing
+  | IVal lhs.intValue  = Just @val
+         lhs.fltValue  = Nothing
+         lhs.boolValue = Nothing
+  | FVal lhs.intValue  = Nothing
+         lhs.fltValue  = Just @val
+         lhs.boolValue = Nothing
+  | Plus  lhs.intValue  = {(+) <$> @right.intValue <*> @left.intValue }
+          lhs.fltValue  = {(+) <$> @right.fltValue <*> @left.fltValue }
+          lhs.boolValue = Nothing
+  | Times lhs.intValue  = {(*) <$> @right.intValue <*> @left.intValue }
+          lhs.fltValue  = {(*) <$> @right.fltValue <*> @left.fltValue }
+          lhs.boolValue = Nothing
+  | LessThan lhs.intValue  = Nothing
+             lhs.fltValue  = Nothing
+             lhs.boolValue = {     (<=) <$> @right.intValue <*> @left.intValue
+                               <|> (<=) <$> @right.fltValue <*> @left.fltValue }
+  | Or  lhs.intValue  = Nothing
+        lhs.fltValue  = Nothing
+        lhs.boolValue = { (||) <$> @right.boolValue <*> @left.boolValue }
+  | And lhs.intValue  = Nothing
+        lhs.fltValue  = Nothing
+        lhs.boolValue = { (||) <$> @right.boolValue <*> @left.boolValue }
+  | Not lhs.intValue  = Nothing
+        lhs.fltValue  = Nothing
+        lhs.boolValue = { not <$> @inner.boolValue }

@@ -1,0 +1,41 @@
+name:           chapter9
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable chapter9
+  hs-source-dirs:  src
+  main-is:         Basic.hs
+  build-depends:   base >= 4, haskeline, monad-loops, random, mtl, binary
+  ghc-options:     -Wall
+  other-modules:   Chapter9.Types
+
+executable chapter9-exn
+  hs-source-dirs:  src
+  main-is:         Exceptions.hs
+  build-depends:   base >= 4, random, mtl, cereal
+  ghc-options:     -Wall
+  other-modules:   Chapter9.Types
+
+executable chapter9-stream
+  hs-source-dirs:  src
+  main-is:         Streams.hs
+  build-depends:   base >= 4, random, mtl, conduit, deepseq, random, bytestring, binary, binary-conduit
+  ghc-options:     -Wall
+  other-modules:   Chapter9.Types
+
+executable chapter9-server
+  hs-source-dirs:  src
+  main-is:         Server.hs
+  build-depends:   base >= 4, mtl, random, network-conduit, conduit, binary, network
+  ghc-options:     -Wall
+  other-modules:   Chapter9.Types
+
+executable chapter9-client
+  hs-source-dirs:  src
+  main-is:         Client.hs
+  build-depends:   base >= 4, mtl, random, network-conduit, conduit, binary, network
+  ghc-options:     -Wall
+  other-modules:   Chapter9.Types
+

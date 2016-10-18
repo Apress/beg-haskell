@@ -1,0 +1,31 @@
+name:           chapter6
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:  src
+  build-depends:   
+                   base >= 4,
+                   data-default,
+                   containers,
+                   lens,
+                   mtl
+  ghc-options:     -Wall
+  exposed-modules: 
+                   Chapter6.CombinatorsState,
+                   Chapter6.IncompleteData,
+                   Chapter6.KMeans,
+                   Chapter6.KMeansLens,
+                   Chapter6.KMeansRWS,
+                   Chapter6.KMeansState,
+                   Chapter6.KMeansStateLens,
+                   Chapter6.Lens,
+                   Chapter6.Lens2,
+                   Chapter6.StateLenses,
+                   Chapter6.Vector
+  other-modules:   
+                   Chapter6.ReaderWriter,
+                   Chapter6.STRef
+

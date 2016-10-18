@@ -1,0 +1,114 @@
+imports
+{
+import Data.List
+import Data.String
+import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5.Attributes as A
+}
+
+include "OfferType.ag"
+
+data HtmlRoot a
+  | HtmlRoot root :: (Offer {a})
+
+attr Offer
+  chn counter   :: Int
+  syn title     :: String
+  syn subtitles :: {[(String,Int)]}
+  syn presents use {++} {[]} :: {[a]}
+
+attr HtmlRoot Offer
+  syn html        :: {H.Html}
+  
+sem Eq {a}, Show {a} => HtmlRoot
+  | HtmlRoot root.counter = 1
+             lhs.html     = { do H.h1 $ H.toHtml "Description of an offer"
+                                 H.h2 $ H.toHtml "Possible presents:"
+                                 H.ul $ mapM_ (\e -> H.li $ H.toHtml (show e)) @root.presents
+                                 H.h2 $ H.toHtml "Main offer"
+                                 H.a H.! A.href (fromString ("#elt" ++ show @root.counter))
+                                       $ H.toHtml @root.title
+                                 H.ul $ mapM_ (\(st, e) -> H.li $ H.a H.! A.href (fromString ("#elt" ++ show e))
+                                                                        $ H.toHtml st)
+                                             @root.subtitles
+                                 H.h2 $ H.toHtml "Complete offer"
+                                 @root.html }
+
+sem Eq {a}, Show {a} => Offer
+  | Present PercentDiscount AbsoluteDiscount
+      loc.ident     = @lhs.counter + 1
+      lhs.counter   = @loc.ident
+  | Restrict From Until Extend
+      inner.counter = @lhs.counter 
+      loc.ident     = @inner.counter + 1
+      lhs.counter   = @loc.ident
+  | Both BetterOf
+      left.counter  = @lhs.counter
+      right.counter = @left.counter
+      loc.ident     = @right.counter + 1
+      lhs.counter   = @loc.ident
+  | If
+      then.counter  = @lhs.counter
+      else.counter  = @then.counter
+      loc.ident     = @else.counter + 1
+      lhs.counter   = @loc.ident
+  | Present PercentDiscount AbsoluteDiscount Restrict From Until Extend Both BetterOf If
+      lhs.html    = { do H.a H.! A.name (fromString ("elt" ++ show @loc.ident))
+                               $ H.toHtml @loc.htmlText
+                         @loc.htmlChild }
+  | Present
+      lhs.title     = { "PRESENT: " ++ show @present }
+      lhs.subtitles = []
+      lhs.presents  = [@present]
+      loc.htmlText  = "Give " ++ show @present ++ " as a present"
+      loc.htmlChild = H.toHtml ""
+  | PercentDiscount
+      lhs.title     = { "DISCOUNT: " ++ show @discount ++ "%" }
+      lhs.subtitles = []
+      loc.htmlText  = show @discount ++ "% discount"
+      loc.htmlChild = H.toHtml ""
+  | AbsoluteDiscount
+      lhs.title     = { "DISCOUNT: " ++ show @discount ++ "$" }
+      lhs.subtitles = []
+      loc.htmlText  = show @discount ++ "$ discount"
+      loc.htmlChild = H.toHtml ""
+  | From
+      lhs.title     = { "FROM: " ++ show @from }
+      lhs.subtitles = [(@inner.title, @inner.counter)]
+      loc.htmlText  = "Only available from " ++ show @from ++ " days on"
+      loc.htmlChild = H.ul $ H.li @inner.html
+  | Until
+      lhs.title     = { "UNTIL: " ++ show @until }
+      lhs.subtitles = [(@inner.title, @inner.counter)]
+      loc.htmlText  = "Only available until " ++ show @until ++ " days"
+      loc.htmlChild = H.ul $ H.li @inner.html
+  | Extend
+      lhs.title     = { "EXTEND: " ++ show @times ++ " times" }
+      lhs.subtitles = [(@inner.title, @inner.counter)]
+      loc.htmlText  = "Available for " ++ show @times ++ " times more"
+      loc.htmlChild = H.ul $ H.li @inner.html
+  | Restrict
+      lhs.title     = { "RESTRICT PRODUCTS" }
+      lhs.subtitles = [(@inner.title, @inner.counter)]
+      lhs.presents  = { @products `intersect` @inner.presents }
+      loc.htmlText  = "Restricting to products " ++ show @products
+      loc.htmlChild = H.ul $ H.li @inner.html
+  | Both
+      lhs.title     = { "BOTH" }
+      lhs.subtitles = [(@left.title, @left.counter), (@right.title, @right.counter)]
+      loc.htmlText  = "Both of"
+      loc.htmlChild = { H.ul $ do H.li @left.html
+                                  H.li @right.html }
+  | BetterOf
+      lhs.title     = { "BETTER OF" }
+      lhs.subtitles = [(@left.title, @left.counter), (@right.title, @right.counter)]
+      loc.htmlText  = "Better of"
+      loc.htmlChild = { H.ul $ do H.li @left.html
+                                  H.li @right.html }
+  | If
+      lhs.title     = { "CONDITIONAL OFFER" }
+      lhs.subtitles = [(@then.title, @then.counter), (@else.title, @else.counter)]
+      loc.htmlText  = "If some condition is true"
+      loc.htmlChild = { H.ul $ do H.li $ H.toHtml "Then" >> @then.html
+                                  H.li $ H.toHtml "Else" >> @else.html }
+

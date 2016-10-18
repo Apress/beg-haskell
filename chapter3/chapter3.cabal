@@ -1,0 +1,18 @@
+name:           chapter3
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+library
+  hs-source-dirs:  src
+  build-depends:   base >= 4
+  ghc-options:     -Wall
+  exposed-modules: Chapter3.ParamPoly
+  other-modules:   
+                   Chapter3.FnsParams,
+                   Chapter3.MoreModules,
+                   Chapter3.Lists,
+                   Chapter3.Comprehensions,
+                   Chapter3.Origami
+

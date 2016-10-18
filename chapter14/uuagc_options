@@ -1,0 +1,14 @@
+file : "src/Chapter14/Simple.ag"
+options : data, semfuns, catas, pretty, wrappers, rename, module "Chapter14.Simple", haskellsyntax, signatures
+
+file : "src/Chapter14/Expr.ag"
+options : data, semfuns, catas, pretty, wrappers, rename, module "Chapter14.Expr", haskellsyntax, signatures
+
+file : "src/Chapter14/Expr2.ag"
+options : data, semfuns, catas, pretty, wrappers, rename, module "Chapter14.Expr2", haskellsyntax, signatures
+
+file : "src/Chapter14/Presents.ag"
+options : data, semfuns, catas, pretty, wrappers, rename, module "Chapter14.Presents", haskellsyntax, signatures
+
+file : "src/Chapter14/Description.ag"
+options : data, semfuns, catas, pretty, wrappers, rename, module "Chapter14.Description", haskellsyntax, signatures

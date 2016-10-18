@@ -1,0 +1,18 @@
+data Root a
+  | Root expr :: (Expr {a})
+
+data Expr a
+  | AmountOf product :: {a}
+  | PriceOf  product :: {a}
+  | TotalNumberOfProducts
+  | TotalPrice
+  | IVal val :: Int
+  | FVal val :: Float
+  | Plus  right :: (Expr {a})  left :: (Expr {a})
+  | Times right :: (Expr {a})  left :: (Expr {a})
+  | LessThan right :: (Expr {a})  left :: (Expr {a})
+  | Or  right :: (Expr {a})  left :: (Expr {a})
+  | And right :: (Expr {a})  left :: (Expr {a})
+  | Not inner :: (Expr {a})
+
+deriving Root Expr : Show

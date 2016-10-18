@@ -1,0 +1,39 @@
+name:           chapter12
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable scotty-server
+  build-depends:   
+                   base >= 4,
+                   scotty,
+                   transformers,
+                   blaze-html,
+                   aeson,
+                   persistent,
+                   persistent-sqlite,
+                   persistent-template,
+                   http-types,
+                   text,
+                   hamlet,
+                   digestive-functors,
+                   digestive-functors-aeson,
+                   digestive-functors-blaze
+  hs-source-dirs:  src
+  ghc-options:     -Wall -rtsopts
+  main-is:         ScottyMain.hs
+  other-modules:   Chapter12.Database
+
+executable yesod-server
+  build-depends:
+                   base >= 4,
+                   yesod,
+                   aeson,
+                   persistent,
+                   persistent-sqlite,
+                   persistent-template
+  hs-source-dirs:  src
+  ghc-options:     -Wall -rtsopts
+  main-is:         YesodMain.hs
+  other-modules:   Chapter12.Database

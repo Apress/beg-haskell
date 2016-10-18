@@ -1,0 +1,18 @@
+name:           chapter10
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable chapter10
+  hs-source-dirs:  src
+  main-is:         Main.hs
+  build-depends:   base >= 4, conduit, bytestring, text, random, mtl, attoparsec, attoparsec-conduit, aeson, unordered-containers, lens, lens-aeson
+  ghc-options:     -Wall
+  other-modules:   Chapter10.Builder, Chapter10.Parser, Chapter10.TypeClasses
+
+executable chapter10-args
+  hs-source-dirs:  src
+  main-is:         Args.hs
+  build-depends:   base >= 4, optparse-applicative
+  ghc-options:     -Wall

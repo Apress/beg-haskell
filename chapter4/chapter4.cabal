@@ -1,0 +1,21 @@
+name:           chapter4
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         Alejandro Serrano
+synopsis:       Package for chapter 4
+maintainer:     Alejandro Serrano <my@email.com>
+homepage:       http://haskell.great.is
+
+library
+  hs-source-dirs:  src
+  build-depends:   
+                   base >= 4,
+                   containers >= 0.5 && < 0.6
+  ghc-options:     -Wall
+  exposed-modules: Chapter4.Containers
+  other-modules:   
+                   Chapter4.TypeClasses,
+                   Chapter4.MinimumPrice,
+                   Chapter4.FunctorsFoldables
+

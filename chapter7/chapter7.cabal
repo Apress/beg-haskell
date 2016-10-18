@@ -1,0 +1,26 @@
+name:           chapter7
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable chapter7
+  hs-source-dirs:  src
+  main-is:         Main.hs
+  build-depends:   
+                   base >= 4,
+                   containers,
+                   logict,
+                   mtl,
+                   transformers
+  ghc-options:     -Wall
+  other-modules:   
+                   Chapter7.APriori.FirstImpl,
+                   Chapter7.APriori.WithMonads,
+                   Chapter7.APriori.Types,
+                   Chapter7.MoreThanOneValue,
+                   Chapter7.MonadPlus,
+                   Chapter7.Graph,
+                   Chapter7.UnderAMonad,
+                   Chapter7.CombiningMonads
+

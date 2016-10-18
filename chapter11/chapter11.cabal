@@ -1,0 +1,25 @@
+name:           chapter11
+version:        0.1
+cabal-version:  >=1.2
+build-type:     Simple
+author:         serras
+
+executable chapter11
+  hs-source-dirs:  src
+  main-is:         Main.hs
+  build-depends:   
+                   base >= 4,
+                   persistent,
+                   persistent-sqlite,
+                   persistent-template,
+                   persistent-postgresql,
+                   esqueleto,
+                   time,
+                   transformers
+  ghc-options:     -Wall
+  other-modules:   
+                   Chapter11.Database,
+                   Chapter11.Gender,
+                   Chapter11.Query,
+                   Chapter11.Update
+
